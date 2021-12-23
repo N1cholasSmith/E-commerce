@@ -25,8 +25,6 @@ router.get('/', (req, res) => {
   }  catch (err) {
     res.status(500).json(err)
   }
- 
-  
 });
 
 router.get('/:id', (req, res) => {
@@ -76,7 +74,7 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   // update a category by its `id` value
   try {
-    const updateCategory = Category.update(
+    const updateCategory = await Category.update(
       req.body, {
         where: {
           id: req.params.id
@@ -106,14 +104,14 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   // delete a category by its `id` value
   try {
-    const categoryData = Category.destroy({
+    const deleteCategory = await Category.destroy({
        where: {
          id: req.params.id
        }
     });
 
-    if(!categoryData) {
-      return res.status(404).json({message: "Category Doesn't exist, check category ID entry"});
+    if(!deleteCategory) {
+      return res.status(404).json({message: "Category doesn't exist, check category ID entry"});
 
     } else {
       res.status(200).json({
@@ -121,7 +119,6 @@ router.delete('/:id', async (req, res) => {
         updateCategory
       });
     };
-
 
   } catch(err) {
     res.status(500).json(err)
