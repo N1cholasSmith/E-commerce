@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../../models');
+const { Tag, Product, ProductTag, Category } = require('../../models');
 
 // The `/api/tags` endpoint
 
@@ -61,11 +61,12 @@ router.get('/:id', (req, res) => {
 router.post('/', async (req, res) => {
   // create a new tag
   try {
-    newTag = await Tag.create(req.body);
+    newTag = await Tag.create({
+      tag_name: req.body.tag_name
+    });
 
-    if(!req.body.tag_name) {
-      //tag_name: { allowNull: false }
-      return res.status(400).json({message: "Entry is Null"});
+    if(!newTag) {
+      return res.status(400).json({message: "No tag found with this ID"});
     } else {
       res.status(200).json(newTag)
     };
@@ -115,19 +116,19 @@ router.delete('/:id', async (req, res) => {
     });
 
     if(!deleteTag) {
-      return res.status(404).json({message: "tag doesn't exist, check tag ID entry"});
+      return res.status(404).json({message: "Tag doesn't exist, check tag ID entry"});
 
     } else {
       res.status(200).json({
-        message: "tag successfully deleted",
+        message: "Tag successfully deleted",
         updateTag
       });
     };
 
-
   } catch(err) {
+    console.log(err)
     res.status(500).json(err)
-  }
+  };
 });
 
 module.exports = router;

@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
         include: [
           {
             model: Product,
-            attributes: ['id', 'product_name', 'price', 'category_id']
+            attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
           }
         ]
     })
@@ -116,7 +116,7 @@ router.delete('/:id', async (req, res) => {
     } else {
       res.status(200).json({
         message: "Category successfully deleted",
-        updateCategory
+        categoryData
       });
     };
 
