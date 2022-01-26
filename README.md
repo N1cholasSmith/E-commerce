@@ -2,6 +2,8 @@
 
 # E-commerce
 
+https://user-images.githubusercontent.com/88865022/151081771-1d62df18-7f1a-4008-a3f6-80d64c37ab9e.mp4
+
 ## Table of Content 
 
 * [Description](#description)
@@ -20,6 +22,10 @@ This is a back end application for an e-commerce site, created using a configure
 
 <a name="technologies"></a>
 ## 🕹 Technologies used 
+
+
+
+
 - Express.js
 - Node
 - Dotenv
